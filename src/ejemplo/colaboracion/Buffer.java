@@ -6,7 +6,7 @@ package ejemplo.colaboracion;
  */
 public class Buffer {
     //Estructrura con los items a producutr
-    public static final String[] prdocutos = {
+    public static final String[] productos = {
             "pan", "jamon", "queso", "alcohol", "sustancias prohibidas", "sangrecita", "higado", "sushi", "el men", " las rptas del examen"};
 
     //almmacena el producto actual en strock
@@ -36,8 +36,15 @@ public class Buffer {
 
     //Este es el metodo del consumidor
     public synchronized String consumir() {
-        
-        return "";
+        while (!hayStock) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        hayStock = false;
+        return item;
     }
 
 }
