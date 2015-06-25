@@ -17,16 +17,14 @@ public class Productor extends Thread {
     public void run() {
         for (int i = 0; i < 10; i++) {
             String queProducir = Buffer.productos[i];
-            b.producir(queProducir);
-
-            System.out.println(Thread.currentThread() + " produce ... " + queProducir);
-            //Thread.sleep(10000);
             try {
                 int dormir = (int) (Math.random() * 10000);
                 TimeUnit.MILLISECONDS.sleep(dormir);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            System.out.println(Thread.currentThread() + " produce ... " + queProducir);
+            b.producir(queProducir);
         }
     }
 }
